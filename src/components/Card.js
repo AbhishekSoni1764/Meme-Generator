@@ -12,9 +12,18 @@ export default function Card() {
     const [allMeme, setAllMeme] = React.useState([])
 
     React.useEffect(() => {
-        fetch("https://api.imgflip.com/get_memes")
-            .then(res => res.json())
-            .then(content => setAllMeme(content.data.memes))
+        // fetch("https://api.imgflip.com/get_memes")
+        //     .then(res => res.json())
+        //     .then(content => setAllMeme(content.data.memes))
+
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const content = await res.json()
+            setAllMeme(content.data.memes)
+        }
+
+        getMemes()
+
     }, [])
 
     function getMemeImg() {
